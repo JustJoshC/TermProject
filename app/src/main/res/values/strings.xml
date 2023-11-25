@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TermProject</string>
+    <string name="title_homePage">Home</string>
+    <string name="title_workoutPage">Workouts</string>
+    <string name="title_dietPage">Diet</string>
+    <string name="title_accountPage">Account</string>
+    <string name="passwordText">************************</string>
+</resources>

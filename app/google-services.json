@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "248913525115",
+    "project_id": "termprojecttemp",
+    "storage_bucket": "termprojecttemp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:248913525115:android:c7fa3b0c18fbfefd72e5de",
+        "android_client_info": {
+          "package_name": "com.example.termprojecttemp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrVoLtHwXSPPwJxx2nuWsuAY5NrqQez2E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:248913525115:android:c97a354893de7aab72e5de",
+        "android_client_info": {
+          "package_name": "com.sheridancollege.cowanjos.advandtermproj"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrVoLtHwXSPPwJxx2nuWsuAY5NrqQez2E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
