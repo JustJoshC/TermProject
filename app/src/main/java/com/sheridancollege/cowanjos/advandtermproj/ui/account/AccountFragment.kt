@@ -1,16 +1,21 @@
 package com.sheridancollege.cowanjos.advandtermproj.ui.account
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -34,6 +39,9 @@ class AccountFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        view?.findNavController()?.saveState()
+
         val accountViewModel =
             ViewModelProvider(this).get(AccountViewModel::class.java)
 
@@ -61,13 +69,37 @@ class AccountFragment : Fragment() {
         }
 
         var logoutButton = binding.toLogin
+        var reminderButton = binding.toReminders
+        var deleteButton = binding.deleteAccount
+        var changeEmail = binding.changeEmail
+        var changePassword = binding.changePassword
 
+
+        //set up the login button
         logoutButton.setOnClickListener{
-            Toast.makeText(context, "Logged out", Toast.LENGTH_SHORT).show()
+
+            //sign user out
             FirebaseAuth.getInstance().signOut()
+
+            //notify user
+            Toast.makeText(context, "Logged out", Toast.LENGTH_SHORT).show()
+
+            //launch coroutine to change the page of the app
             scope.launch {
                 changePage()
             }
+        }
+
+        //setting up the reminder button
+        reminderButton.setOnClickListener {
+
+            Toast.makeText(context, "Reminders", Toast.LENGTH_SHORT).show()
+            view?.findNavController()?.navigate(R.id.action_navigation_account_to_navigation_account_edit)
+        }
+
+        //setting up delete functionality
+        deleteButton.setOnClickListener {
+
         }
 
 
@@ -81,5 +113,12 @@ class AccountFragment : Fragment() {
     suspend fun changePage(): Unit = withContext(Dispatchers.Unconfined){
         val intent = Intent(view?.context, Login::class.java)
         startActivity(intent)
+    }
+
+
+    suspend fun changeView(fragment: Fragment): Unit = withContext(Dispatchers.Main){
+
+
+
     }
 }
