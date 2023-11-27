@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.sheridancollege.cowanjos.advandtermproj.*
 import com.sheridancollege.cowanjos.advandtermproj.databinding.FragmentAccountBinding
@@ -23,8 +24,9 @@ class AccountFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
+        view?.findNavController()?.saveState()
 
-        val homeViewModel =
+        val accountViewModel =
             ViewModelProvider(this).get(AccountViewModel::class.java)
 
         // Initialize Firebase Auth and get current user
@@ -32,29 +34,38 @@ class AccountFragment : Fragment() {
         val firebaseUser = auth.currentUser
 
         binding = FragmentAccountBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        if (firebaseUser != null) {
+        if (firebaseUser == null) {
 
-            binding.toLogin.setOnClickListener {
-                auth.signOut()
-                Toast.makeText(context, "Logged out", Toast.LENGTH_SHORT).show()
-                redirectToLogin()
-            }
-
-            binding.accountEmail.text = auth.currentUser?.email
-
-            binding.editUser.setOnClickListener {
-                view?.findNavController()?.navigate(R.id.action_navigation_account_to_editAccount)
-
-            }
+            redirectToLogin()
 
         } else {
-            // User not logged in, redirect to login page
+            binding.accountEmail.text = auth.currentUser?.email
+        }
+
+
+        binding.toLogin.setOnClickListener {
+            auth.signOut()
+            Toast.makeText(context, "Logged out", Toast.LENGTH_SHORT).show()
             redirectToLogin()
         }
 
-        return root
+        binding.editUser.setOnClickListener {
+            Toast.makeText(context, "Edit Account", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_navigation_account_to_editAccount)
+
+        }
+
+        binding.deleteAccount.setOnClickListener {
+            Toast.makeText(context, "Delete Account", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.toReminders.setOnClickListener {
+            Toast.makeText(context, "Reminders", Toast.LENGTH_SHORT).show()
+
+        }
+
+        return binding.root
     }
 
     private fun redirectToLogin() {
