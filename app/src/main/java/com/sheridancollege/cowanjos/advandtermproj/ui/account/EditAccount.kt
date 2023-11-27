@@ -52,6 +52,8 @@ class EditAccount : Fragment() {
 
         saveButton.setOnClickListener {
             auth.currentUser!!.updatePassword(userPassword.text.toString())
+            auth.currentUser!!.updateEmail(userEmail.text.toString())
+
             Toast.makeText(view?.context, "Updated Account Info", Toast.LENGTH_SHORT).show()
 
             view?.findNavController()?.navigate(R.id.action_editAccount_to_navigation_account)

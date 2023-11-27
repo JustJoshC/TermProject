@@ -62,6 +62,7 @@ class AccountFragment : Fragment() {
 
         binding.toReminders.setOnClickListener {
             Toast.makeText(context, "Reminders", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_navigation_account_to_reminderFragment)
 
         }
 

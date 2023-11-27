@@ -29,7 +29,7 @@ class FreeWeightsRepository(private val freeWeightsDao: FreeWeightsDao) {
     }
 
     // Function to get all FreeWeights workouts for a specific account
-    suspend fun getFreeWeightsByAccountId(accountId: Int): List<FreeWeights> {
+    suspend fun getFreeWeightsByAccountId(accountId: String): List<FreeWeights> {
         return freeWeightsDao.getFreeWeightsByAccountId(accountId)
     }
 }

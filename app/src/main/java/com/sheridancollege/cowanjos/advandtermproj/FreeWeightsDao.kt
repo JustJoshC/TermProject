@@ -17,7 +17,7 @@ interface FreeWeightsDao {
     fun getAllFreeWeights(): LiveData<List<FreeWeights>>
 
     @Query("SELECT * FROM free_weights WHERE accountId = :accountId")
-    suspend fun getFreeWeightsByAccountId(accountId: Int): List<FreeWeights>
+    suspend fun getFreeWeightsByAccountId(accountId: String): List<FreeWeights>
 
     @Query("UPDATE free_weights SET date = :date, muscleGroup = :muscleGroup, workoutDuration = :workoutDuration WHERE freeWeightsId = :freeWeightsId")
     suspend fun updateFreeWeights(freeWeightsId: Int, date: String, muscleGroup: String, workoutDuration: String)
@@ -26,5 +26,5 @@ interface FreeWeightsDao {
     suspend fun deleteFreeWeights(freeWeightsId: Int)
 
     @Query("DELETE FROM free_weights WHERE accountId = :accountId")
-    suspend fun deleteAllFreeWeightsForAccount(accountId: Int)
+    suspend fun deleteAllFreeWeightsForAccount(accountId: String)
 }
