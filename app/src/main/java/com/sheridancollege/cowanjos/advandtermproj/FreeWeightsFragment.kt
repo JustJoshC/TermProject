@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.sheridancollege.cowanjos.advandtermproj.ui.account.AccountViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import com.sheridancollege.cowanjos.advandtermproj.databinding.FragmentFreeWeightsFragmentBinding
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -23,8 +23,8 @@ class FreeWeightsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewModel: FreeWeightsViewModel
-    private lateinit var accountViewModel: AccountViewModel // Add AccountViewModel
     private lateinit var freeWeightsAdapter: FreeWeightsAdapter
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentFreeWeightsFragmentBinding.inflate(inflater, container, false)
@@ -46,18 +46,12 @@ class FreeWeightsFragment : Fragment() {
         viewModel = ViewModelProvider(this, factory).get(FreeWeightsViewModel::class.java)
 
 
+        auth = FirebaseAuth.getInstance()
+
         // Account Stuff
-
-        // Get the DAO from the database instance
-        val accountDao = database.accountDao()
-
-        // Create the repository instance using the DAO
-        val accountRepository = AccountRepository(accountDao)
 
         // Initialize the AccountViewModel
         // Make sure to provide the necessary dependencies for AccountViewModelFactory
-        val accountFactory = AccountViewModelFactory(accountRepository)
-        accountViewModel = ViewModelProvider(this, accountFactory).get(AccountViewModel::class.java)
 
         // Initialize RecyclerView and Adapter
         setupRecyclerView()
@@ -124,8 +118,7 @@ class FreeWeightsFragment : Fragment() {
 
             // Launch a coroutine to perform database operations
             lifecycleScope.launch {
-                val username = "nintendogamer350@gmail.com" // Replace with the actual logic to get the logged-in username
-                val accountId = accountViewModel.getUserIdByUsername(username)
+                val accountId = auth.currentUser!!.email
 
                 // Check if accountId is not null, meaning the user was found
                 if (accountId != null) {
