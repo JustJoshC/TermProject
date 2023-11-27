@@ -8,5 +8,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_account_edit">Edit Account</string>
+    <string name="title_account_reminder">Set Reminder</string>
+    <string name="title_account_delete">Delete Account</string>
+    <string name="account_delete_warning">Are you sure you want to delete your account? If you delete your account you will permanently lose your Workouts and Diet</string>
     <string name="passwordText">****************************</string>
+
 </resources>

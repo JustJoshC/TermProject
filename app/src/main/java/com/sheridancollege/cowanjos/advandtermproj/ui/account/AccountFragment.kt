@@ -58,6 +58,7 @@ class AccountFragment : Fragment() {
 
         binding.deleteAccount.setOnClickListener {
             Toast.makeText(context, "Delete Account", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_navigation_account_to_deleteAccount2)
         }
 
         binding.toReminders.setOnClickListener {

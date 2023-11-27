@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_navigation_account_to_reminderFragment"
             app:destination="@id/reminderFragment" />
+        <action
+            android:id="@+id/action_navigation_account_to_deleteAccount2"
+            app:destination="@id/deleteAccount2" />
     </fragment>
 
     <fragment
@@ -61,7 +64,7 @@
     <fragment
         android:id="@+id/editAccount"
         android:name="com.sheridancollege.cowanjos.advandtermproj.ui.account.EditAccount"
-        android:label="fragment_edit_account"
+        android:label="@string/title_account_edit"
         tools:layout="@layout/fragment_edit_account" >
         <action
             android:id="@+id/action_editAccount_to_navigation_account"
@@ -70,10 +73,19 @@
     <fragment
         android:id="@+id/reminderFragment"
         android:name="com.sheridancollege.cowanjos.advandtermproj.ui.account.reminderFragment"
-        android:label="fragment_reminder"
+        android:label="@string/title_account_reminder"
         tools:layout="@layout/fragment_reminder" >
         <action
             android:id="@+id/action_reminderFragment_to_navigation_account"
+            app:destination="@id/navigation_account" />
+    </fragment>
+    <fragment
+        android:id="@+id/deleteAccount2"
+        android:name="com.sheridancollege.cowanjos.advandtermproj.ui.account.DeleteAccount"
+        android:label="@string/title_account_delete"
+        tools:layout="@layout/fragment_delete_account" >
+        <action
+            android:id="@+id/action_deleteAccount2_to_navigation_account"
             app:destination="@id/navigation_account" />
     </fragment>
 
