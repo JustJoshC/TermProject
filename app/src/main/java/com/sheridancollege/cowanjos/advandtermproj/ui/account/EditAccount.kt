@@ -40,7 +40,7 @@ class EditAccount : Fragment() {
         var userPassword = binding.userPassword
 
 
-        userEmail.hint = auth.currentUser?.email
+        userEmail.setText(auth.currentUser!!.email)
 
 
         cancelButton.setOnClickListener {
