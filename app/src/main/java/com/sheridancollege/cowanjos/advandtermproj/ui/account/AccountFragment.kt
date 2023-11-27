@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
+import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.sheridancollege.cowanjos.advandtermproj.*
@@ -54,6 +54,13 @@ class AccountFragment : Fragment() {
             auth.signOut()
             Toast.makeText(context, "Logged out", Toast.LENGTH_SHORT).show()
             redirectToLogin()
+        }
+
+        binding.accountEmail.text = auth.currentUser?.email
+
+        binding.editUser.setOnClickListener {
+            view?.findNavController()?.navigate(R.id.action_navigation_account_to_editAccount)
+
         }
 
         return root

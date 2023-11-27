@@ -21,7 +21,11 @@
         android:id="@+id/navigation_account"
         android:name="com.sheridancollege.cowanjos.advandtermproj.ui.account.AccountFragment"
         android:label="@string/title_accountPage"
-        tools:layout="@layout/fragment_account"/>
+        tools:layout="@layout/fragment_account">
+        <action
+            android:id="@+id/action_navigation_account_to_editAccount"
+            app:destination="@id/editAccount" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_free_weights"
@@ -50,6 +54,15 @@
         <action
             android:id="@+id/action_workoutFragment_to_cyclingFragment"
             app:destination="@id/navigation_cycling" />
+    </fragment>
+    <fragment
+        android:id="@+id/editAccount"
+        android:name="com.sheridancollege.cowanjos.advandtermproj.ui.account.EditAccount"
+        android:label="fragment_edit_account"
+        tools:layout="@layout/fragment_edit_account" >
+        <action
+            android:id="@+id/action_editAccount_to_navigation_account"
+            app:destination="@id/navigation_account" />
     </fragment>
 
 </navigation>

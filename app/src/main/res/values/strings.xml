@@ -7,4 +7,6 @@
     <string name="planet_fitness_image_desc">Image showing a vibrant and energetic fitness environment, representing the spirit of Planet Fitness.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_account_edit">Edit Account</string>
+    <string name="passwordText">****************************</string>
 </resources>
