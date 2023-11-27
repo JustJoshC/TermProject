@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.sheridancollege.cowanjos.advandtermproj.R
 import com.sheridancollege.cowanjos.advandtermproj.databinding.FragmentWorkoutsBinding
 
 class WorkoutFragment : Fragment() {
@@ -17,22 +19,23 @@ class WorkoutFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val workoutViewModel =
-            ViewModelProvider(this).get(WorkoutViewModel::class.java)
+    private lateinit var viewModel: WorkoutViewModel
 
-        _binding = FragmentWorkoutsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        val binding = FragmentWorkoutsBinding.inflate(inflater, container, false)
 
-        val textView: TextView = binding.textWorkouts
-        workoutViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        viewModel = ViewModelProvider(this).get(WorkoutViewModel::class.java)
+
+        binding.btnFreeWeights.setOnClickListener {
+            findNavController().navigate(R.id.action_workoutFragment_to_freeWeightsFragment)
         }
-        return root
+
+        binding.btnCycling.setOnClickListener {
+            findNavController().navigate(R.id.action_workoutFragment_to_cyclingFragment)
+        }
+
+        return binding.root
     }
 
     override fun onDestroyView() {

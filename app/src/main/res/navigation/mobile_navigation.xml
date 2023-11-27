@@ -12,12 +12,6 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_workouts"
-        android:name="com.sheridancollege.cowanjos.advandtermproj.ui.workouts.WorkoutFragment"
-        android:label="@string/title_workoutPage"
-        tools:layout="@layout/fragment_workouts" />
-
-    <fragment
         android:id="@+id/navigation_diet"
         android:name="com.sheridancollege.cowanjos.advandtermproj.ui.diet.DietFragment"
         android:label="@string/title_dietPage"
@@ -27,6 +21,35 @@
         android:id="@+id/navigation_account"
         android:name="com.sheridancollege.cowanjos.advandtermproj.ui.account.AccountFragment"
         android:label="@string/title_accountPage"
-        tools:layout="@layout/fragment_account"
-        />
+        tools:layout="@layout/fragment_account"/>
+
+    <fragment
+        android:id="@+id/navigation_free_weights"
+        android:name="com.sheridancollege.cowanjos.advandtermproj.FreeWeightsFragment"
+        android:label="Free Weights"
+        tools:layout="@layout/fragment_free_weights_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_cycling"
+        android:name="com.sheridancollege.cowanjos.advandtermproj.CyclingFragment"
+        android:label="Cycling"
+        tools:layout="@layout/fragment_cycling" />
+
+
+
+    <!-- Navigation Actions -->
+    <fragment
+        android:id="@+id/navigation_workout"
+        android:name="com.sheridancollege.cowanjos.advandtermproj.ui.workouts.WorkoutFragment"
+        android:label="Workout"
+        tools:layout="@layout/fragment_workouts">
+        <action
+            android:id="@+id/action_workoutFragment_to_freeWeightsFragment"
+            app:destination="@id/navigation_free_weights" />
+
+        <action
+            android:id="@+id/action_workoutFragment_to_cyclingFragment"
+            app:destination="@id/navigation_cycling" />
+    </fragment>
+
 </navigation>

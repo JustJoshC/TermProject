@@ -1,10 +1,11 @@
 package com.sheridancollege.cowanjos.advandtermproj.ui.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.sheridancollege.cowanjos.advandtermproj.databinding.FragmentHomeBinding
@@ -12,9 +13,6 @@ import com.sheridancollege.cowanjos.advandtermproj.databinding.FragmentHomeBindi
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -28,11 +26,23 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
+        // Setup WebView
+        setupWebView()
+
         homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+            binding.textHome.text = it
         }
         return root
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private fun setupWebView() {
+        binding.homeWebView.apply {
+            webViewClient = WebViewClient() // Ensures that links open within the WebView
+            settings.javaScriptEnabled = true // Enable JavaScript if needed
+            loadUrl("https://www.planetfitness.com/community/articles/7-motivating-gym-tips-beginners")
+            // Replace with your desired URL
+        }
     }
 
     override fun onDestroyView() {
