@@ -1,14 +1,12 @@
 package com.sheridancollege.cowanjos.advandtermproj.ui.account
 
 import android.os.Bundle
-import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.findNavController
-import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.sheridancollege.cowanjos.advandtermproj.R
@@ -38,27 +36,23 @@ class EditAccount : Fragment() {
 
         var cancelButton = binding.cancelButton
         var saveButton = binding.saveAccount
+        var userEmail = binding.userEmail
+        var userPassword = binding.userPassword
 
-        binding.userEmail.setText(auth.currentUser!!.email)
+
+        userEmail.hint = auth.currentUser?.email
 
 
         cancelButton.setOnClickListener {
+
+
             view?.findNavController()?.navigate(R.id.action_editAccount_to_navigation_account)
+
         }
 
         saveButton.setOnClickListener {
-            user = auth.currentUser!!
-
-            //val newCredentials = EmailAuthProvider.getCredential(binding.userEmail.text.toString(), binding.userPassword.text.toString())
-
-            //user.reauthenticate(newCredentials).onSuccessTask {
-                //user.updateEmail(binding.userEmail.text.toString())
-                //user.updatePassword(binding.userPassword.text.toString())
-            //}
-
-
-            user.updateEmail(binding.userEmail.text.toString())
-            user.updatePassword(binding.userPassword.text.toString())
+            auth.currentUser!!.updatePassword(userPassword.text.toString())
+            auth.currentUser!!.updateEmail(userEmail.text.toString())
 
             Toast.makeText(view?.context, "Updated Account Info", Toast.LENGTH_SHORT).show()
 
