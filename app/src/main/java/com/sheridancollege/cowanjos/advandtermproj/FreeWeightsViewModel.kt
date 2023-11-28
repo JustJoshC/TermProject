@@ -12,6 +12,7 @@ import kotlinx.coroutines.withContext
 import java.time.LocalDate
 
 class FreeWeightsViewModel(private val repository: FreeWeightsRepository) : ViewModel() {
+    //Here is the FreeWeightsViewModel class :)
 
     // LiveData to observe the FreeWeights data changes in the UI
     val freeWeightsList: LiveData<List<FreeWeights>> = repository.allFreeWeights
@@ -20,7 +21,6 @@ class FreeWeightsViewModel(private val repository: FreeWeightsRepository) : View
     val duplicateWorkoutDetected = MutableLiveData<Boolean>()
 
     // Function to add a new FreeWeights workout
-    @RequiresApi(Build.VERSION_CODES.O)
     fun addFreeWeights(freeWeights: FreeWeights) {
         viewModelScope.launch {
             if (!isExistingWorkout(freeWeights.muscleGroup, freeWeights.date)) {
@@ -40,7 +40,6 @@ class FreeWeightsViewModel(private val repository: FreeWeightsRepository) : View
      * @param excludeId The ID of the workout being edited, if any (null for new workouts).
      * @return True if a duplicate workout exists, false otherwise.
      */
-    @RequiresApi(Build.VERSION_CODES.O)
     suspend fun checkForExistingWorkout(muscleGroup: String, date: LocalDate, excludeId: Int?): Boolean {
         return withContext(Dispatchers.IO) {
             // Call the repository method to check for an existing workout
@@ -49,7 +48,6 @@ class FreeWeightsViewModel(private val repository: FreeWeightsRepository) : View
     }
 
     // Function to update an existing FreeWeights workout
-    @RequiresApi(Build.VERSION_CODES.O)
     fun updateFreeWeights(freeWeights: FreeWeights) {
         viewModelScope.launch {
             if (!isExistingWorkout(freeWeights.muscleGroup, freeWeights.date, freeWeights.freeWeightsId)) {
@@ -69,7 +67,6 @@ class FreeWeightsViewModel(private val repository: FreeWeightsRepository) : View
     }
 
     // Check if there's an existing workout with the same muscle group and date
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun isExistingWorkout(muscleGroup: String, date: LocalDate, editingId: Int? = null): Boolean {
         val workouts = freeWeightsList.value ?: return false
         return workouts.any {
