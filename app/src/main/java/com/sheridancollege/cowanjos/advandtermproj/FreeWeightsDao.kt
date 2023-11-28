@@ -26,4 +26,14 @@ interface FreeWeightsDao {
     @Query("DELETE FROM free_weights WHERE accountId = :accountId")
     suspend fun deleteAllFreeWeightsForAccount(accountId: String)
 
+    /**
+     * Checks if a workout with the specified muscle group and date already exists in the database,
+     * excluding a specific workout ID.
+     * @param muscleGroup The muscle group of the workout.
+     * @param date The date of the workout.
+     * @param excludeId The ID of the workout to exclude from the check.
+     * @return Boolean indicating whether a duplicate workout exists.
+     */
+    @Query("SELECT COUNT(*) FROM free_weights WHERE muscleGroup = :muscleGroup AND date = :date AND freeWeightsId != :excludeId")
+    suspend fun checkForExistingWorkout(muscleGroup: String, date: String, excludeId: Int?): Int
 }

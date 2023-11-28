@@ -1,7 +1,6 @@
 package com.sheridancollege.cowanjos.advandtermproj
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.time.LocalDate
@@ -22,10 +21,23 @@ class FreeWeightsRepository(private val freeWeightsDao: FreeWeightsDao) {
             freeWeights.muscleGroup, freeWeights.workoutDuration)
     }
 
+    /**
+     * Checks if a workout with the specified muscle group and date already exists in the database,
+     * excluding a specific workout ID.
+     * @param muscleGroup The muscle group of the workout.
+     * @param date The date of the workout.
+     * @param excludeId The ID of the workout to exclude from the check.
+     * @return Boolean indicating whether a duplicate workout exists.
+     */
+    suspend fun checkForExistingWorkout(muscleGroup: String, date: LocalDate, excludeId: Int?): Boolean {
+        return withContext(Dispatchers.IO) {
+            val count = freeWeightsDao.checkForExistingWorkout(muscleGroup, date.toString(), excludeId)
+            count > 0
+        }
+    }
 
     // Function to delete a specific FreeWeights workout by ID
     suspend fun deleteFreeWeights(freeWeightsId: Int) {
         freeWeightsDao.deleteFreeWeights(freeWeightsId)
     }
-
 }

@@ -50,6 +50,14 @@ class FreeWeightsFragment : Fragment() {
         val factory = FreeWeightsViewModelFactory(freeWeightsRepository)
         viewModel = ViewModelProvider(this, factory).get(FreeWeightsViewModel::class.java)
 
+        // Observe the LiveData for duplicate workout detection
+        viewModel.duplicateWorkoutDetected.observe(viewLifecycleOwner) { isDuplicate ->
+            if (isDuplicate) {
+                Toast.makeText(context, "A workout with this muscle group and date already exists.", Toast.LENGTH_SHORT).show()
+                viewModel.duplicateWorkoutDetected.value = false // Reset after handling
+            }
+        }
+
 
         auth = FirebaseAuth.getInstance()
 
@@ -114,45 +122,52 @@ class FreeWeightsFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun handleUpdate() {
+        // Retrieve the input values from the UI form fields.
         val muscleGroupInput = binding.muscleGroupInput.text.toString().trim()
         val durationInput = binding.durationInput.text.toString().trim()
         val dateString = binding.dateLabel.text.toString()
 
-        // Validate inputs
+        // Validate the inputs to ensure they are not empty or unchanged.
         if (muscleGroupInput.isBlank() || durationInput.isBlank() || dateString == "Select Date") {
             Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             return
         }
 
         try {
+            // Parse the date string into a LocalDate object using the specified format.
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
             val date = LocalDate.parse(dateString, formatter)
 
-            // Use viewModelScope to execute isEditingToExistingWorkout check
+            // Launch a coroutine within the ViewModel's scope to perform the update logic.
             viewModel.viewModelScope.launch {
-                if (!isEditingToExistingWorkout(muscleGroupInput, date)) {
-                    // Proceed with update as the edited workout is unique
+                // Check if there's an existing workout with the same details (excluding the current one being edited).
+                if (!viewModel.checkForExistingWorkout(muscleGroupInput, date, editingFreeWeight?.freeWeightsId)) {
+                    // If no existing workout is found, create a copy of the editing workout with updated values.
                     val updatedFreeWeight = editingFreeWeight!!.copy(
                         muscleGroup = muscleGroupInput,
                         workoutDuration = durationInput,
                         date = date
                     )
+                    // Call the ViewModel's method to update the workout in the database.
                     viewModel.updateFreeWeights(updatedFreeWeight)
+                    // Notify the user of successful update.
                     Toast.makeText(context, "Workout updated successfully", Toast.LENGTH_SHORT).show()
+                    // Clear the input fields and reset the editing state.
                     clearInputFields()
                     editingFreeWeight = null
-                }
-
-                else if(isEditingToExistingWorkout(muscleGroupInput, date)){
-                    // Show an error message as the workout is not unique
+                } else {
+                    // If an existing workout is found, notify the user of the duplicate.
                     Toast.makeText(context, "A workout with this muscle group and date already exists.", Toast.LENGTH_SHORT).show()
                 }
             }
-
         } catch (e: DateTimeParseException) {
+            // Catch and handle any exceptions due to invalid date format.
             Toast.makeText(context, "Invalid date format. Please select a valid date.", Toast.LENGTH_SHORT).show()
         }
     }
+
+
+
 
 
     @RequiresApi(Build.VERSION_CODES.O)
