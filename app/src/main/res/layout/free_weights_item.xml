@@ -7,6 +7,7 @@
         android:orientation="horizontal"
         android:padding="16dp">
 
+        <!-- Content Layout -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -35,12 +36,28 @@
                 android:textSize="16sp" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/delete_button"
+        <!-- Buttons Layout -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delete"
-            android:layout_gravity="center_vertical" />
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical">
+
+            <!-- Edit Button -->
+            <Button
+                android:id="@+id/edit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit"
+                android:layout_marginEnd="8dp" /> <!-- Added margin here -->
+
+            <!-- Delete Button -->
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete" />
+        </LinearLayout>
 
     </LinearLayout>
 

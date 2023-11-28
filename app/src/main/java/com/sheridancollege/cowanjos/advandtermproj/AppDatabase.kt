@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
 // Annotate with @Database, list all the entities and set version
-@Database(entities = [Diet::class, Meal::class, Cycling::class, FreeWeights::class /*, any other entities */], version = 1, exportSchema = false)
+@Database(entities = [Diet::class, Meal::class, Cycling::class, FreeWeights::class /*, any other entities */], version = 2, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sheridancollege.cowanjos.advandtermproj.databinding.FreeWeightsItemBinding
 
 class FreeWeightsAdapter(
+    private val onEditClicked: (FreeWeights) -> Unit, // Callback function for edit action
     private val onDeleteClicked: (FreeWeights) -> Unit // Callback function for delete action
 ) : RecyclerView.Adapter<FreeWeightsAdapter.FreeWeightsViewHolder>() {
 
@@ -25,6 +26,11 @@ class FreeWeightsAdapter(
             muscleGroupTextView.text = currentItem.muscleGroup
             durationTextView.text = currentItem.workoutDuration
             dateTextView.text = currentItem.date.toString()
+
+            // Set the edit button listener
+            editButton.setOnClickListener {
+                onEditClicked(currentItem) // Invoke the callback with the current item
+            }
 
             // Set the delete button listener
             deleteButton.setOnClickListener {

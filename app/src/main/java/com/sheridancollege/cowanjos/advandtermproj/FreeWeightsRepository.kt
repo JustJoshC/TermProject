@@ -1,6 +1,10 @@
 package com.sheridancollege.cowanjos.advandtermproj
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.time.LocalDate
 
 class FreeWeightsRepository(private val freeWeightsDao: FreeWeightsDao) {
 
@@ -18,18 +22,10 @@ class FreeWeightsRepository(private val freeWeightsDao: FreeWeightsDao) {
             freeWeights.muscleGroup, freeWeights.workoutDuration)
     }
 
+
     // Function to delete a specific FreeWeights workout by ID
     suspend fun deleteFreeWeights(freeWeightsId: Int) {
         freeWeightsDao.deleteFreeWeights(freeWeightsId)
     }
 
-    // Function to get a specific FreeWeights workout by ID
-    suspend fun getFreeWeights(freeWeightsId: Int): FreeWeights {
-        return freeWeightsDao.getFreeWeights(freeWeightsId)
-    }
-
-    // Function to get all FreeWeights workouts for a specific account
-    suspend fun getFreeWeightsByAccountId(accountId: String): List<FreeWeights> {
-        return freeWeightsDao.getFreeWeightsByAccountId(accountId)
-    }
 }
