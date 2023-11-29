@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/text_Diet"
+        android:id="@+id/text_Diet_goal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -21,17 +21,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_meals"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/text_Diet"
-        app:layout_constraintStart_toStartOf="parent"
+    <EditText
+        android:id="@+id/editDietGoals"
+        android:layout_width="252dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Enter Target Calories"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/buttons_layout"
-        android:layout_margin="8dp"
-        tools:listitem="@layout/meal_table_item" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.249" />
+
+    <TextView
+        android:id="@+id/textViewDietGoalsLabel"
+        android:layout_width="109dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="16dp"
+        android:text="Target Calories:"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.255" />
+
+
 
     <LinearLayout
         android:id="@+id/buttons_layout"
@@ -44,33 +58,34 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <Button
-            android:id="@+id/btn_add_meal"
+            android:id="@+id/btn_save_diet_goal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:text="Add Meal" />
+            android:text="Save" />
 
         <TextView
-            android:id="@+id/placeholder"
+            android:id="@+id/placeholder2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="" />
 
         <Button
-            android:id="@+id/btn_diet_goals"
+            android:id="@+id/btn_remove_diet_goals"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:text="Diet Goals" />
+            android:text="Remove" />
     </LinearLayout>
 
-    <!-- Guideline to position buttons above bottom -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9" /> <!-- Adjust this value as needed -->
+        app:layout_constraintGuide_percent="0.9" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

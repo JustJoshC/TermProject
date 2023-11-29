@@ -15,7 +15,28 @@
         android:id="@+id/navigation_diet"
         android:name="com.sheridancollege.cowanjos.advandtermproj.ui.diet.DietFragment"
         android:label="@string/title_dietPage"
-        tools:layout="@layout/fragment_diet" />
+        tools:layout="@layout/fragment_diet" >
+        <action
+            android:id="@+id/action_navigation_diet_to_navigation_diet_goal"
+            app:destination="@id/navigation_diet_goal" />
+        <action
+            android:id="@+id/action_navigation_diet_to_navigation_meal"
+            app:destination="@id/navigation_meal" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_diet_goal"
+        android:name="com.sheridancollege.cowanjos.advandtermproj.ui.diet.DietGoalFragment"
+        android:label="Diet Goal"
+        tools:layout="@layout/fragment_diet_goals" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_meal"
+        android:name="com.sheridancollege.cowanjos.advandtermproj.ui.diet.AddMealFragment"
+        android:label="Add Meal"
+        tools:layout="@layout/fragment_add_meal" >
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_account"

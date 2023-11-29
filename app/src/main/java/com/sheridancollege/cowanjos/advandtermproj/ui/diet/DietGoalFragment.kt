@@ -10,10 +10,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sheridancollege.cowanjos.advandtermproj.R
 import com.sheridancollege.cowanjos.advandtermproj.databinding.FragmentDietBinding
+import com.sheridancollege.cowanjos.advandtermproj.databinding.FragmentDietGoalsBinding
 
-class DietFragment : Fragment() {
+class DietGoalFragment: Fragment() {
 
-    private var _binding: FragmentDietBinding? = null
+    private var _binding: FragmentDietGoalsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -24,24 +25,13 @@ class DietFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dietViewModel =
-            ViewModelProvider(this).get(DietViewModel::class.java)
+        val dietGoalViewModel =
+            ViewModelProvider(this).get(DietGoalViewModel::class.java)
 
-        _binding = FragmentDietBinding.inflate(inflater, container, false)
+        _binding = FragmentDietGoalsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.btnDietGoals.setOnClickListener{
-            findNavController().navigate(R.id.action_navigation_diet_to_navigation_diet_goal)
-        }
 
-        binding.btnAddMeal.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_diet_to_navigation_meal)
-        }
-
-        val textView: TextView = binding.textDiet
-        dietViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         return root
     }
 
