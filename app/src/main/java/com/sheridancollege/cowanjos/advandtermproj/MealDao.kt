@@ -1,5 +1,6 @@
 package com.sheridancollege.cowanjos.advandtermproj
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -20,4 +21,7 @@ interface MealDao {
 
     @Query("DELETE FROM meals WHERE mealId = :mealId")
     suspend fun deleteMeal(mealId: Int)
+
+    @Query("SELECT * FROM meals")
+    fun getAllMeals(): LiveData<List<Meal>>
 }

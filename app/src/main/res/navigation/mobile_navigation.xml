@@ -29,6 +29,9 @@
         android:name="com.sheridancollege.cowanjos.advandtermproj.ui.diet.DietGoalFragment"
         android:label="Diet Goal"
         tools:layout="@layout/fragment_diet_goals" >
+        <action
+            android:id="@+id/action_navigation_diet_goal_to_navigation_diet3"
+            app:destination="@id/navigation_diet" />
     </fragment>
 
     <fragment
@@ -36,6 +39,9 @@
         android:name="com.sheridancollege.cowanjos.advandtermproj.ui.diet.AddMealFragment"
         android:label="Add Meal"
         tools:layout="@layout/fragment_add_meal" >
+        <action
+            android:id="@+id/action_navigation_meal_to_navigation_diet3"
+            app:destination="@id/navigation_diet" />
     </fragment>
 
     <fragment

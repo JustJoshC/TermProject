@@ -6,17 +6,13 @@ import androidx.room.PrimaryKey
 import java.time.LocalTime
 
 
-@Entity(tableName = "meals",
-    foreignKeys = [ForeignKey(
-        entity = Diet::class,
-        parentColumns = arrayOf("dietId"),
-        childColumns = arrayOf("dietId"),
-        onDelete = ForeignKey.CASCADE)]
-)
+@Entity(tableName = "meals")
+
 data class Meal(
     @PrimaryKey(autoGenerate = true) val mealId: Int,
     val dietId: Int,
-    val mealTime: LocalTime,
+    val accountId: String?,
+    val mealTime: String,
     val mealDescription: String,
     val mealCalories: Int
 )

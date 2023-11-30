@@ -8,6 +8,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.sheridancollege.cowanjos.advandtermproj.AppDatabase
 import com.sheridancollege.cowanjos.advandtermproj.R
 import com.sheridancollege.cowanjos.advandtermproj.databinding.FragmentDietBinding
 import com.sheridancollege.cowanjos.advandtermproj.databinding.FragmentDietGoalsBinding
@@ -15,6 +17,9 @@ import com.sheridancollege.cowanjos.advandtermproj.databinding.FragmentDietGoals
 class DietGoalFragment: Fragment() {
 
     private var _binding: FragmentDietGoalsBinding? = null
+
+    private lateinit var viewModel: DietGoalViewModel
+    private lateinit var auth: FirebaseAuth
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,11 +30,15 @@ class DietGoalFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dietGoalViewModel =
-            ViewModelProvider(this).get(DietGoalViewModel::class.java)
 
         _binding = FragmentDietGoalsBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        val database = AppDatabase.getInstance(requireContext())
+
+        val dietDao = database.dietDao()
+
+
 
 
         return root
