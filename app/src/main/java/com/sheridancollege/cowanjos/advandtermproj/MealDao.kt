@@ -24,4 +24,7 @@ interface MealDao {
 
     @Query("SELECT * FROM meals")
     fun getAllMeals(): LiveData<List<Meal>>
+
+    @Query("SELECT * FROM meals ORDER BY mealId DESC LIMIT 1")
+    suspend fun getLastInsertedMeal(): Meal?
 }

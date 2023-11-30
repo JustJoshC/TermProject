@@ -8,7 +8,6 @@ import androidx.room.PrimaryKey
 data class Diet(
     @PrimaryKey(autoGenerate = true) val dietId: Int,
     val accountId: String,
-    val targetCalories: Int,
-    val currentCalories: Int
+    val targetCalories: Int
 )
 
