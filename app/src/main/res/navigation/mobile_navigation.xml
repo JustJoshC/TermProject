@@ -70,7 +70,7 @@
         android:id="@+id/navigation_cycling"
         android:name="com.sheridancollege.cowanjos.advandtermproj.CyclingFragment"
         android:label="Cycling"
-        tools:layout="@layout/fragment_cycling" />
+        tools:layout="@layout/cycling_item" />
 
 
 
