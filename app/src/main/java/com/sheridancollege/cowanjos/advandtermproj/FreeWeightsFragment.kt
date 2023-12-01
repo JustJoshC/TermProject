@@ -1,14 +1,12 @@
 package com.sheridancollege.cowanjos.advandtermproj
 
 import android.app.DatePickerDialog
-import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
@@ -30,7 +28,6 @@ class FreeWeightsFragment : Fragment() {
     private lateinit var freeWeightsAdapter: FreeWeightsAdapter
     private lateinit var auth: FirebaseAuth
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentFreeWeightsFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
@@ -74,7 +71,6 @@ class FreeWeightsFragment : Fragment() {
         return view
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun setupRecyclerView() {
         // Initialize the adapter with lambda functions for both edit and delete actions
         freeWeightsAdapter = FreeWeightsAdapter(
@@ -94,7 +90,6 @@ class FreeWeightsFragment : Fragment() {
         binding.freeWeightsRecyclerView.adapter = freeWeightsAdapter
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun handleEditFreeWeight(freeWeight: FreeWeights) {
         editingFreeWeight = freeWeight
         // Populate the form with the details of the workout being edited
@@ -104,7 +99,6 @@ class FreeWeightsFragment : Fragment() {
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun setupClickListeners() {
         binding.datePickerButton.setOnClickListener {
             showDatePicker()
@@ -120,7 +114,6 @@ class FreeWeightsFragment : Fragment() {
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun handleUpdate() {
         // Retrieve the input values from the UI form fields.
         val muscleGroupInput = binding.muscleGroupInput.text.toString().trim()
@@ -166,26 +159,6 @@ class FreeWeightsFragment : Fragment() {
         }
     }
 
-
-
-
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun isEditingToExistingWorkout(muscleGroup: String, date: LocalDate): Boolean {
-        val freeWeightsList = viewModel.freeWeightsList.value ?: return false
-
-        return freeWeightsList.any { existingWorkout ->
-            existingWorkout.muscleGroup.equals(muscleGroup, ignoreCase = true) &&
-                    existingWorkout.date.isEqual(date) &&
-                    existingWorkout.freeWeightsId != editingFreeWeight?.freeWeightsId
-        }
-    }
-
-
-
-
-
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun showDatePicker() {
         val currentDate = LocalDate.now()
         val datePickerDialog = DatePickerDialog(requireContext(), { _, year, month, dayOfMonth ->
@@ -198,7 +171,6 @@ class FreeWeightsFragment : Fragment() {
         datePickerDialog.show()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun handleSave() {
         val muscleGroupInput = binding.muscleGroupInput.text.toString()
         val durationInput = binding.durationInput.text.toString()

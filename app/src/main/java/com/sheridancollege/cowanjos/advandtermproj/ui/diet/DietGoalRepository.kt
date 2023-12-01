@@ -6,5 +6,5 @@ import com.sheridancollege.cowanjos.advandtermproj.DietDao
 
 class DietGoalRepository (private val dietDao: DietDao) {
 
-    val allDietGoals: LiveData<List<Diet>> = dietDao.getDiet()
+    //val allDietGoals: LiveData<List<Diet>> = dietDao.getDiet()
 }

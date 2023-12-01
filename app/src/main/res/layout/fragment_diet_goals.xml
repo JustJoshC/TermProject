@@ -35,8 +35,8 @@
 
     <TextView
         android:id="@+id/textViewDietGoalsLabel"
-        android:layout_width="109dp"
-        android:layout_height="26dp"
+        android:layout_width="115dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:text="Target Calories:"
         android:textSize="16sp"
