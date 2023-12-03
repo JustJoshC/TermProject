@@ -2,11 +2,13 @@ package com.sheridancollege.cowanjos.advandtermproj.ui.diet
 
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.sheridancollege.cowanjos.advandtermproj.AppDatabase
 import com.sheridancollege.cowanjos.advandtermproj.R
 import com.sheridancollege.cowanjos.advandtermproj.databinding.FragmentDietBinding
+import java.io.File
 
 class DietFragment : Fragment() {
 
@@ -83,7 +86,7 @@ class DietFragment : Fragment() {
 
         setupRecyclerView()
 
-
+        displayLatestImage()
 
         viewModel.addMealList.observe(viewLifecycleOwner) { addMealList ->
             dietAdapter.setMeals(addMealList)
@@ -98,6 +101,42 @@ class DietFragment : Fragment() {
         dietAdapter = DietAdapter()
         binding.recyclerViewMeals.layoutManager = LinearLayoutManager(context)
         binding.recyclerViewMeals.adapter = dietAdapter
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun displayLatestImage() {
+        val imagePath = getLatestImagePath()
+        if (!imagePath.isNullOrBlank()) {
+            val imageFile = File(imagePath)
+            if (imageFile.exists()) {
+                binding.capturedImage.setImageURI(imageFile.toUri())
+            }
+        }
+    }
+
+    private fun getLatestImagePath(): String? {
+        val projection = arrayOf(
+            MediaStore.Images.Media.DATA,
+            MediaStore.Images.ImageColumns.DATE_TAKEN
+        )
+
+        val cursor = requireContext().contentResolver.query(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            projection,
+            "${MediaStore.Images.ImageColumns.DATA} like '%Pictures/TermProject-Image%'",
+            null,
+            "${MediaStore.Images.ImageColumns.DATE_TAKEN} DESC"
+        )
+
+        var latestImagePath: String? = null
+        cursor?.use { c ->
+            if (c.moveToFirst()) {
+                latestImagePath = c.getString(c.getColumnIndexOrThrow(MediaStore.Images.Media.DATA))
+            }
+        }
+        cursor?.close()
+
+        return latestImagePath
     }
 
     override fun onDestroyView() {
