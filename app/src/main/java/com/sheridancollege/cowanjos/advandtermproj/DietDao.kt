@@ -1,5 +1,6 @@
 package com.sheridancollege.cowanjos.advandtermproj
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -15,9 +16,13 @@ interface DietDao {
     @Query("SELECT * FROM diets WHERE accountId = :accountId")
     fun getDietsByAccountId(accountId: Int): List<Diet>
 
-    @Query("UPDATE diets SET targetCalories = :targetCalories, currentCalories = :currentCalories WHERE dietId = :dietId")
-    fun updateDiet(dietId: Int, targetCalories: Int, currentCalories: Int)
-
     @Query("DELETE FROM diets WHERE dietId = :dietId")
     fun deleteDiet(dietId: Int)
+
+    @Query("SELECT * FROM diets")
+    fun getAllDiets(): LiveData<List<Diet>>
+
+    @Query("SELECT * FROM diets ORDER BY dietId DESC LIMIT 1")
+    suspend fun getLastInsertedDiet(): Diet?
+
 }

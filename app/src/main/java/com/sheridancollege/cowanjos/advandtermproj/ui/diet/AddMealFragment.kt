@@ -64,6 +64,13 @@ class AddMealFragment: Fragment() {
             findNavController().navigate(R.id.action_navigation_meal_to_navigation_diet3)
         }
 
+        binding.btnDeleteMeal.setOnClickListener {
+            lifecycleScope.launch {
+                viewModel.deleteLastMeal()
+                findNavController().navigate(R.id.action_navigation_meal_to_navigation_diet3)
+            }
+        }
+
         return root
     }
 

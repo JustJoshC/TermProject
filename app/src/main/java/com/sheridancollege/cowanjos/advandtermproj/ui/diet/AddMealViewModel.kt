@@ -16,4 +16,10 @@ class AddMealViewModel(private val repository: AddMealRepository) : ViewModel() 
             repository.insertMeal(meal)
         }
     }
+
+    fun deleteLastMeal(){
+        viewModelScope.launch {
+            repository.deleteLastInsertedDietGoal()
+        }
+    }
 }
