@@ -105,21 +105,31 @@ class DietFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun displayLatestImage() {
+        // Get the path of the latest image from the specified directory
         val imagePath = getLatestImagePath()
+
+        // Check if the path is not null or blank
         if (!imagePath.isNullOrBlank()) {
+            // Create a File object from the image path
             val imageFile = File(imagePath)
+
+            // Check if the file actually exists in the file system
             if (imageFile.exists()) {
+                // If the file exists, set it as the image source for the ImageView in your layout
                 binding.capturedImage.setImageURI(imageFile.toUri())
             }
         }
     }
 
+
     private fun getLatestImagePath(): String? {
+        // Define the columns to retrieve from the MediaStore
         val projection = arrayOf(
             MediaStore.Images.Media.DATA,
             MediaStore.Images.ImageColumns.DATE_TAKEN
         )
 
+        // Perform a query on the MediaStore to retrieve images
         val cursor = requireContext().contentResolver.query(
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
             projection,
@@ -128,16 +138,24 @@ class DietFragment : Fragment() {
             "${MediaStore.Images.ImageColumns.DATE_TAKEN} DESC"
         )
 
+        // Initialize a variable to hold the path of the latest image
         var latestImagePath: String? = null
+
+        // Use the cursor to navigate through the query results
         cursor?.use { c ->
+            // If the cursor can move to the first row, it means there is at least one image
             if (c.moveToFirst()) {
+                // Retrieve the image path from the DATA column and store it in the variable
                 latestImagePath = c.getString(c.getColumnIndexOrThrow(MediaStore.Images.Media.DATA))
             }
         }
+        // Close the cursor to free up resources
         cursor?.close()
 
+        // Return the path of the latest image
         return latestImagePath
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
