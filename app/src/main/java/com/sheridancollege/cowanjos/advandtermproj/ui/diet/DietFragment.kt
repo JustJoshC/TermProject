@@ -96,14 +96,12 @@ class DietFragment : Fragment() {
         return root
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun setupRecyclerView(){
         dietAdapter = DietAdapter()
         binding.recyclerViewMeals.layoutManager = LinearLayoutManager(context)
         binding.recyclerViewMeals.adapter = dietAdapter
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun displayLatestImage() {
         // Get the path of the latest image from the specified directory
         val imagePath = getLatestImagePath()
@@ -144,7 +142,7 @@ class DietFragment : Fragment() {
         // Use the cursor to navigate through the query results
         cursor?.use { c ->
             // If the cursor can move to the first row, it means there is at least one image
-            if (c.moveToFirst()) {
+            if (c.moveToLast()) {
                 // Retrieve the image path from the DATA column and store it in the variable
                 latestImagePath = c.getString(c.getColumnIndexOrThrow(MediaStore.Images.Media.DATA))
             }
