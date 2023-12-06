@@ -21,6 +21,8 @@ class Login : AppCompatActivity() {
                 super.onStart()
                 // Check if user is signed in (non-null) and update UI accordingly.
                 val currentUser = auth.currentUser
+
+                //if logged in sends straight to main page
                 if (currentUser != null) {
                     intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
@@ -55,6 +57,7 @@ class Login : AppCompatActivity() {
 
                 val linkToSignup = findViewById<TextView>(R.id.toSignUp)
 
+                //sends user to sign up page
                 linkToSignup.setOnClickListener {
                     Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, Register::class.java)
@@ -62,7 +65,7 @@ class Login : AppCompatActivity() {
                     finish()
                 }
 
-
+                //if user email and password are registered brings the user to the main page
                 loginButton.setOnClickListener {
                     Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show()
                     progressbar.visibility = View.VISIBLE

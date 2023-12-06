@@ -33,6 +33,7 @@ class DeleteAccount : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        //when delete is confirmed removes the account from the firebase auth users
         binding.deleteButton.setOnClickListener {
             var user = firebaseAuth.currentUser
             user?.reauthenticate(EmailAuthProvider.getCredential("Example@Email", "Password"))
