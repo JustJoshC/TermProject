@@ -141,7 +141,7 @@ class DietFragment : Fragment() {
 
         // Use the cursor to navigate through the query results
         cursor?.use { c ->
-            // If the cursor can move to the first row, it means there is at least one image
+            // If the cursor can move to the last row, it means there is at least one image
             if (c.moveToLast()) {
                 // Retrieve the image path from the DATA column and store it in the variable
                 latestImagePath = c.getString(c.getColumnIndexOrThrow(MediaStore.Images.Media.DATA))
