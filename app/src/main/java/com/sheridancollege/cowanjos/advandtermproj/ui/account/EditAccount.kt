@@ -43,6 +43,7 @@ class EditAccount : Fragment() {
         userEmail.setText(auth.currentUser!!.email)
 
 
+        // returns to account fragment
         cancelButton.setOnClickListener {
 
 
@@ -50,6 +51,7 @@ class EditAccount : Fragment() {
 
         }
 
+        // updates the users email and password if valid
         saveButton.setOnClickListener {
             auth.currentUser!!.updatePassword(userPassword.text.toString())
             auth.currentUser!!.updateEmail(userEmail.text.toString())

@@ -54,6 +54,7 @@ class Register : AppCompatActivity() {
 
 
 
+        // sends user to login screen
         linkToLogin.setOnClickListener{
             var intent = Intent(this, Login::class.java)
             startActivity(intent)
@@ -61,6 +62,7 @@ class Register : AppCompatActivity() {
         }
 
 
+        // creates a user on the firebase auth
         signUpButton.setOnClickListener{
 
             progressbar.visibility = View.VISIBLE

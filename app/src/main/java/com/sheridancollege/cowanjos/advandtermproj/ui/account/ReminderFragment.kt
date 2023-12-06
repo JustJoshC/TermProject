@@ -54,6 +54,7 @@ class reminderFragment : Fragment() {
         return binding.root
     }
 
+    //Creating the notification with user specified title and desc
     private fun createNotificationChannel(){
         val name = "Notif Channel"
         val desc = "In charge of workout reminders"
@@ -66,6 +67,7 @@ class reminderFragment : Fragment() {
         notificationManager.createNotificationChannel(channel)
     }
 
+    //Setting the notifications date and time
     @SuppressLint("ScheduleExactAlarm")
     private fun scheduleNotification(){
         val intent = Intent(context, Notification::class.java)
@@ -89,6 +91,7 @@ class reminderFragment : Fragment() {
         showAlert(time, title, desc)
     }
 
+    //creates a confirmation message that the notification has been made
     private fun showAlert(time: Long, title: String, message: String){
         val date = Date(time)
         val dateFormat = android.text.format.DateFormat.getDateFormat(context)
@@ -101,6 +104,7 @@ class reminderFragment : Fragment() {
             .show()
     }
 
+    // collects the time in milliseconds from the time picker
     private fun getTime(): Long {
         val hour = binding.timePicker.hour
         val minute = binding.timePicker.minute

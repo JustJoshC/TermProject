@@ -16,14 +16,17 @@ class Notification : BroadcastReceiver() {
     @SuppressLint("NotificationPermission")
     override fun onReceive(context: Context, intent: Intent?) {
 
+        //creating the notification layout
         val notification = NotificationCompat.Builder(context, channelID)
             .setSmallIcon(R.drawable.ic_account_icon)
             .setContentTitle(intent?.getStringExtra(titleExtra))
             .setContentText(intent?.getStringExtra(messageExtra))
             .build()
 
+        //setting up the notification service
         val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
+        // setting the notification
         manager.notify(notificationID, notification)
 
 

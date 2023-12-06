@@ -35,6 +35,7 @@ class AccountFragment : Fragment() {
 
         binding = FragmentAccountBinding.inflate(inflater, container, false)
 
+        //checks if user is logged in and set email to currrent users if not send to login
         if (firebaseUser == null) {
 
             redirectToLogin()
@@ -43,24 +44,27 @@ class AccountFragment : Fragment() {
             binding.accountEmail.text = auth.currentUser?.email
         }
 
-
+        //signs user out and send them to login page via the redirectToLogin function
         binding.toLogin.setOnClickListener {
             auth.signOut()
             Toast.makeText(context, "Logged out", Toast.LENGTH_SHORT).show()
             redirectToLogin()
         }
 
+        //Sends user to the edit account fragment using navigation action
         binding.editUser.setOnClickListener {
             Toast.makeText(context, "Edit Account", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_navigation_account_to_editAccount)
 
         }
 
+        //sends user to the delete account fragement using navigation action
         binding.deleteAccount.setOnClickListener {
             Toast.makeText(context, "Delete Account", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_navigation_account_to_deleteAccount2)
         }
 
+        //sends user to the reminder fragement using navigation action
         binding.toReminders.setOnClickListener {
             Toast.makeText(context, "Reminders", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_navigation_account_to_reminderFragment)
@@ -70,10 +74,14 @@ class AccountFragment : Fragment() {
         return binding.root
     }
 
+
+
     private fun redirectToLogin() {
+        //sends user back to login page and closes main page
         val intent = Intent(activity, Login::class.java)
         startActivity(intent)
         activity?.finish()
+
     }
 
     override fun onDestroyView() {
